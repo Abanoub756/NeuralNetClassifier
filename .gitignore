@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vs/
+.vscode/
+.idea/
+.venv/
+venv/
+env/
+*.egg-info/
+.streamlit/secrets.toml
+# generated artifacts
+results/*.json
+results/*.csv
+results/*.png
+# original datasets must never be committed
+data/*
+!data/README.md
+*.data
+student-por.csv
+student-mat.csv
+*.zip

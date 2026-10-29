@@ -18,19 +18,27 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 #    Optional override without editing this file: set the environment
 #    variables NNC_HEART_PATH / NNC_STUDENT_PATH.
 # --------------------------------------------------------------------------- #
-HEART_DATA_PATH = Path(os.environ.get(
-    "NNC_HEART_PATH",
-    r"D:\Last year 2026-2027\1st term\Neural network\NN Project\heart+disease\processed.cleveland.data",
-))
-STUDENT_DATA_PATH = Path(os.environ.get(
-    "NNC_STUDENT_PATH",
-    r"D:\Last year 2026-2027\1st term\Neural network\NN Project\student+performance\student\student-por.csv",
-))
+# Base directory of the project
+BASE_DIR = Path(__file__).resolve().parent
+
+# Your local Windows paths
+local_heart = r"D:\Last year 2026-2027\1st term\Neural network\NN Project\heart+disease\processed.cleveland.data"
+local_student = r"D:\Last year 2026-2027\1st term\Neural network\NN Project\student+performance\student\student-por.csv"
+
+# Repository fallback paths (pointing to your project's 'data' folder)
+repo_heart = BASE_DIR / "data" / "processed.cleveland.data"
+repo_student = BASE_DIR / "data" / "student-por.csv"
+
+# Dynamic selection: use local D:\ path if it exists, otherwise use the repo's data folder
+default_heart = local_heart if Path(local_heart).exists() else repo_heart
+default_student = local_student if Path(local_student).exists() else repo_student
+
+HEART_DATA_PATH = Path(os.environ.get("NNC_HEART_PATH", default_heart))
+STUDENT_DATA_PATH = Path(os.environ.get("NNC_STUDENT_PATH", default_student))
 
 DATASET_PATHS: Dict[str, Path] = {"heart": HEART_DATA_PATH, "student": STUDENT_DATA_PATH}
 CONFIG_PATH_NAMES = {"heart": "HEART_DATA_PATH", "student": "STUDENT_DATA_PATH"}
 ENV_VARS = {"heart": "NNC_HEART_PATH", "student": "NNC_STUDENT_PATH"}
-
 DATASET_INFO: Dict[str, Dict[str, Any]] = {
     "heart": {
         "label": "Cleveland Heart Disease",

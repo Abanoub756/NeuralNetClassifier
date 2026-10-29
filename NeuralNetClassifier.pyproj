@@ -57,7 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="data\processed.cleveland.data" />
     <Content Include="data\README.md" />
+    <Content Include="data\student-por.csv" />
     <Content Include="pytest.ini" />
     <Content Include="README.md" />
     <Content Include="requirements.txt" />
